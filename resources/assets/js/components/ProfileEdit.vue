@@ -16,6 +16,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label for="skills">Skills</label>
+                            <input type="text" id="skills" name="skills" class="form-control mb-1">
+                            <button class="btn btn-info" @click.prevent="addSkill">Add</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <ul class="list-inline">
+                            <li class="mb-1" v-for='(skill, index) in skills' :key='index'>
+                                <span class="btn btn-info">{{ skill.name }}</span>
+                                <button class="btn btn-danger"  @click.prevent='deleteSkill(skill)'>Delete</button>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="form-group">
                         <label for="bio">Short bio</label>
                         <textarea class="form-control" id="bio" name="bio" rows="5" v-model="bio"></textarea>
@@ -41,7 +56,21 @@
                 id: this.user.id,
                 avatar: this.user.avatar,
                 bio: this.user.bio,
-                about: this.user.about
+                about: this.user.about,
+                skills: [
+                    {
+                        name: 'skill 1'
+                    },
+                    {
+                        name: 'skill 2'
+                    },
+                    {
+                        name: 'skill 3'
+                    },
+                    {
+                        name: 'skill 4'
+                    }
+                ]
             }
         },
         methods: {
@@ -62,7 +91,21 @@
                     this.avatar = e.target.result;
                 };
                 reader.readAsDataURL(file);
-            }
+            },
+            addSkill() {
+                let skill = document.querySelector('#skills').value;
+                if ( skill == '' ) {
+                    return;
+                }
+                this.skills.push({
+                    name: skill
+                });
+                document.querySelector('#skills').value = '';
+            },
+            deleteSkill(skill) {
+                let index = this.skills.indexOf(skill);
+                this.skills.splice(index, 1);
+            },
         }
     }
 </script>

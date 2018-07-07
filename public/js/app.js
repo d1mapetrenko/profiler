@@ -13873,7 +13873,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(43);
 
 
 /***/ }),
@@ -13898,7 +13898,7 @@ window.Vue = __webpack_require__(36);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('profile-edit', __webpack_require__(48));
+Vue.component('profile-edit', __webpack_require__(39));
 
 var app = new Vue({
   el: '#app'
@@ -47152,17 +47152,53 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 /* 39 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(41)
+/* template */
+var __vue_template__ = __webpack_require__(42)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ProfileEdit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2003fd28", Component.options)
+  } else {
+    hotAPI.reload("data-v-2003fd28", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -47271,60 +47307,26 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(45)
-/* script */
-var __vue_script__ = __webpack_require__(49)
-/* template */
-var __vue_template__ = __webpack_require__(50)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/ProfileEdit.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2003fd28", Component.options)
-  } else {
-    hotAPI.reload("data-v-2003fd28", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 49 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47368,7 +47370,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: this.user.id,
             avatar: this.user.avatar,
             bio: this.user.bio,
-            about: this.user.about
+            about: this.user.about,
+            skills: [{
+                name: 'skill 1'
+            }, {
+                name: 'skill 2'
+            }, {
+                name: 'skill 3'
+            }, {
+                name: 'skill 4'
+            }]
         };
     },
     methods: {
@@ -47391,12 +47402,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.avatar = e.target.result;
             };
             reader.readAsDataURL(file);
+        },
+        addSkill: function addSkill() {
+            var skill = document.querySelector('#skills').value;
+            if (skill == '') {
+                return;
+            }
+            this.skills.push({
+                name: skill
+            });
+            document.querySelector('#skills').value = '';
+        },
+        deleteSkill: function deleteSkill(skill) {
+            var index = this.skills.indexOf(skill);
+            this.skills.splice(index, 1);
         }
     }
 });
 
 /***/ }),
-/* 50 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47451,6 +47476,59 @@ var render = function() {
                   )
                 ])
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c("div", { staticClass: "col-4" }, [
+                _c("label", { attrs: { for: "skills" } }, [_vm._v("Skills")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mb-1",
+                  attrs: { type: "text", id: "skills", name: "skills" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.addSkill($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Add")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "ul",
+                { staticClass: "list-inline" },
+                _vm._l(_vm.skills, function(skill, index) {
+                  return _c("li", { key: index, staticClass: "mb-1" }, [
+                    _c("span", { staticClass: "btn btn-info" }, [
+                      _vm._v(_vm._s(skill.name))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.deleteSkill(skill)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ])
+                })
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -47542,6 +47620,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-2003fd28", module.exports)
   }
 }
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
