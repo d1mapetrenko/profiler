@@ -1,0 +1,30 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.profile-tags {
+  padding: .75rem;
+  li {
+    display: inline-block;
+    font-size: initial;
+    padding: .25rem;  
+  }
+}
